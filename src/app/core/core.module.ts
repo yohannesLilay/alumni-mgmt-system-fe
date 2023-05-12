@@ -9,16 +9,29 @@ import { SharedModule } from '../shared/shared.module';
 
 /** Custom Services */
 import { ProgressBarService } from './progress-bar/progress-bar.service';
+import { AuthenticationService } from './authentication/authentication.service';
+
+/** Custom Guards */
+import { AuthenticationGuard } from './authentication/authentication.guard';
 
 /** Custom Interceptors */
 import { ProgressInterceptor } from './progress-bar/progress.interceptor';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
+import { AuthenticationInterceptor } from './authentication/authentication.interceptor';
 
 @NgModule({
   declarations: [ProgressBarComponent],
   imports: [SharedModule],
   providers: [
+    AuthenticationService,
+    AuthenticationGuard,
+    AuthenticationInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
     ProgressBarService,
     {
       provide: HTTP_INTERCEPTORS,
