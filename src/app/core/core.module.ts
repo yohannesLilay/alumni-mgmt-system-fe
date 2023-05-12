@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 /** Custom Components */
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
@@ -19,6 +20,9 @@ import { ProgressInterceptor } from './progress-bar/progress.interceptor';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
 import { AuthenticationInterceptor } from './authentication/authentication.interceptor';
+
+/** Custom Strategies */
+import { RouteReusableStrategy } from './route/route-reusable-strategy';
 
 @NgModule({
   declarations: [ProgressBarComponent],
@@ -40,6 +44,18 @@ import { AuthenticationInterceptor } from './authentication/authentication.inter
     },
     ApiPrefixInterceptor,
     ErrorHandlerInterceptor,
+    {
+      provide: RouteReuseStrategy,
+      useClass: RouteReusableStrategy,
+    },
   ],
 })
-export class CoreModule {}
+export class CoreModule {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    if (parentModule) {
+      throw new Error(
+        `${parentModule} has already been loaded. Import Core module in the AppModule only.`
+      );
+    }
+  }
+}
