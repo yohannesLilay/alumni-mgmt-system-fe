@@ -4,27 +4,29 @@ This is an Angular Material app that implements a alumni management system. It a
 
 ## Getting Started
 
-To get started with this app, you will need to have Node.js and Angular CLI installed on your machine. If you don't have these tools installed, you can download them from the following links:
-
-Node.js
-Angular CLI
-
+To get started with this app, you will need to have Node.js and Angular CLI installed on your machine. 
 Once you have these tools installed, you can clone this repository and install the dependencies by running the following commands:
 
+```bash
 git clone https://github.com/yohannesLilay/alumni-mgmt-system-fe
 cd alumni-mgmt-system-fe
 npm install
+```
 
 ## Running the App
 To run the app, simply run the following command:
 
+```bash
 ng serve
+```
 This will start a development server and launch the app in your default browser. You can access the app at http://localhost:4200.
 
 ## Building the App
 To build the app for production, run the following command:
 
+```bash
 ng build --prod
+```
 This will create a production build of the app in the dist directory.
 
 ## Features
