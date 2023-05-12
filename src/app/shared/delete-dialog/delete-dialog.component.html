@@ -1,0 +1,25 @@
+<h1 matDialogTitle>Delete</h1>
+<div mat-dialog-content>
+    <p>
+        Are you sure you want to delete {{ data.deleteContext }} ?
+    </p>
+</div>
+<div
+    mat-dialog-actions
+    class="pt-24"
+>
+    <button
+        mat-raised-button
+        class="mat-accent mr-16"
+        color="warn"
+        [mat-dialog-close]="{ delete: true }"
+    >
+        Confirm
+    </button>
+    <button
+        mat-button
+        mat-dialog-close
+    >
+        Cancel
+    </button>
+</div>
