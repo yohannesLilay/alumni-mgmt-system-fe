@@ -1,5 +1,5 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 /** Custom Components */
@@ -7,6 +7,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 /** Custom Modules */
 import { SharedModule } from '../shared/shared.module';
+import { MainModule } from '../main/main.module';
 
 /** Custom Services */
 import { ProgressBarService } from './progress-bar/progress-bar.service';
@@ -26,7 +27,7 @@ import { RouteReusableStrategy } from './route/route-reusable-strategy';
 
 @NgModule({
   declarations: [ProgressBarComponent],
-  imports: [SharedModule],
+  imports: [SharedModule, MainModule, RouterModule, HttpClientModule],
   providers: [
     AuthenticationService,
     AuthenticationGuard,
